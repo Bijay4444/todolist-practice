@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+
+{% block title %}Home Page{% endblock title %}
+
+{% block body %}
+
+<div class="container m-3">
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Title</th>
+        <th scope="col">Description</th>
+        <th scope="col">Completed</th>
+        <th scope="col">Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for task in tasks %}
+      <tr>
+        <td scope="row"> {{forloop.counter}}</td>
+        <td>{{task.title}}</td>
+        <td>{{task.description}}</td>
+        <td>
+          {% if task.is_completed %}
+            <p class= "text-success"> Completed </p>
+          {% else %}
+            <p class= "text-danger"> Not Completed </p>
+          {% endif %}
+        </td>
+        <td>
+          <a href="delete/{{task.id}}" class="btn btn-danger">Delete</a>
+          <a href="edit/{{task.id}}" class="btn btn-primary">Edit</a>
+          <a href="mark_completed/{{task.id}}" class="btn btn-primary">Mark</a>
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% endblock body %}
+

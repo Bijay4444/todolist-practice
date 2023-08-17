@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% block title %}Create {% endblock title %}
+{% block body %}
+
+{% comment %} <h1>Edit page</h1> {% endcomment %}
+<div class="container">
+  {% if error %}
+    <div class="bg-danger">
+      <p>{{error}}</p>
+    </div>
+  {% endif %}
+
+  <form method="POST" action="/edit/{{task.id}}">
+    {% csrf_token %}
+    <div class="mb-3">
+      <label for="exampleInputEmail1" class="form-label">Title</label>
+      <input
+        type="text"
+        class="form-control"
+        id="title"
+        name="title"
+        value="{{task.title}}"
+        aria-describedby="emailHelp"
+      />
+    <br>
+      <div class="form-floating">
+        <textarea name="description" class="form-control" placeholder="Description" id="floatingTextarea2" style="height: 100px">
+            {{task.description}}
+
+        </textarea>
+        <label for="floatingTextarea2">Comments</label>
+      </div>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Submit</button>
+  </form>
+</div>
+
+{% endblock body %}
